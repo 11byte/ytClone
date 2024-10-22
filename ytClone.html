@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>yt clone</title>
+        <style>
+            p{
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            body{
+                height: 1000px;
+                padding-left: 285px;
+                margin: 0px;
+                padding-top: 70px ;
+                background-color: rgb(248, 248, 248);
+            }
+            .image{
+                width: 100% ;
+                border-radius: 10px;
+                margin-left: 10px;
+                
+            }
+            .pfp{
+                display: inline-block;
+                vertical-align: top;
+                margin-top: 5px;
+                width: 40px;
+                margin-left: 10px;
+                border-radius: 20px;
+                transition: width 0.5s;
+            }
+           
+            .video-name{
+                width: 100%;
+                vertical-align: top;
+                display: inline-block;
+                margin-top: 5px;
+                margin-left: 5px;
+                font-weight: 550;
+                margin-bottom: 0px;
+            }
+            .channel-name{
+                display: inline-block;
+                margin-top: 5px;
+                font-weight: 100;
+                font-size: 15px;
+            }
+            .views{
+                font-size: 15px;
+                font-weight: 100;
+            }
+            .video-preview{
+                vertical-align: top;
+                width: 400px;
+                display: inline-block;
+            }
+            .search-bar{
+                display: block;
+                border-style: solid;
+                border-color: gray;
+            }
+            .video-desc{
+                display: inline-block;
+                width: 300px;
+            }
+            .video-details{
+                display: grid;
+                grid-template-columns: 50px 1fr;
+            }
+            .video-grid{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 16px;
+                row-gap: 40px;
+            }
+            .header{
+                z-index: 100;
+                position: fixed;
+                right: 0;
+                left: 0;
+                top: 0;
+                height: 55px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                background-color: white;
+                border-bottom-style: solid;
+                border-bottom-color: lightgray;
+
+            }
+            .left-section{
+                display: flex;
+                /* background-color: cadetblue; */
+                width: 200px;
+                
+            }
+            .right-section{
+                justify-content: space-between;
+                display: flex;
+                flex-direction: row;
+                flex-shrink: 0;
+                width: 200px;
+                /* background-color: cadetblue; */
+            }
+            .middle-section{
+                display: flex;
+                flex: 1;
+                /* background-color: lightcoral; */
+                margin-left: 70px;
+                margin-right: 35px;
+                max-width: 500px;
+            }
+            .search-bar{
+                padding-left: 10px;
+                box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex: 1;
+                margin-top: 10px;
+                display: block;
+                height: 25px;
+                
+                
+            }
+            .search-btn{
+                box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+                width: 30px;
+                height: 30px;
+                margin-top: 10px;
+                margin-left: -1px;
+                border-style: solid;
+                border-color: gray;
+                margin-right: 10px;
+            }
+            .yt-voice{
+                width: 30px;
+                height: 30px;
+                margin-top: 10px;
+                border-radius: 15px;
+                border:none;
+                padding-top: 5px;
+            }
+            .yt-voice:hover,.search-btn:hover{
+                background-color: rgb(205, 205, 205);
+            }
+            .ham{
+                width: 25px;
+                align-items: center;
+                margin-left: 10px;
+                margin-right: 15px;
+                border-radius: 5px;
+            }
+            .ham:hover{
+                background-color: rgb(239, 239, 239);
+            }
+            .yt-logo{
+                width: 90px;
+                align-items: center;
+                margin-bottom: 5px;
+                padding-top: 18px;
+            }
+            .upload{
+                width: 30px;
+            }
+            .yt-apps{
+                width: 30px;
+            }
+            .yt-notification{
+                width: 30px;
+            }
+            .my-profile{
+                margin-top: 10px;
+                height: 30px;
+                width: 30px;
+                border-radius: 15px;
+            }
+            .search-btn:hover,.yt-voice:hover,.upload:hover,.yt-apps:hover,.notification-container:hover,.my-profile,.ham,.pfp{
+                cursor: pointer;
+            }
+            .thumb-row{
+                position: relative;
+            }
+            .video-time{
+                width: 50px;
+                color: white;
+                position: absolute;
+                background-color: rgb(0, 0, 0);
+                bottom: 10px;
+                right: 6px;
+                border-radius: 20px;
+                padding-left: 8px;
+            }
+            .notification-container{
+                margin-top: 10px;
+                position: relative;
+            }
+            .notification-count{
+                font-size: smaller;
+                border-style: solid;
+                border-color: white;
+                background-color: rgb(154, 5, 5);
+                color: white;
+                top: 0px;
+                right: -3px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                padding-right:4px;
+                padding-left: 4px;
+                border-radius: 15px;
+                position: absolute;
+            }
+            .sidebar{
+                z-index: 2;
+                left: 0px;
+                position: fixed;
+                top: 55px;
+                bottom: 0px;
+                width: 280px;
+                background-color: white;
+            }
+            .sidebar-link{
+                align-items: center;
+                background-color: white;
+                height: 75px;
+                padding-left: 0px;
+            }
+            .yt-home,.yt-explore,.yt-subscriptions,.yt-originals,.yt-music,.yt-library{
+                width: 30px;
+                padding-left: 18px;
+                padding-top: 15px;
+            }
+            .sidebar-link:hover{
+                cursor: pointer;
+                border-radius: 10px;
+                border-color: rgb(227, 222, 222);
+                border-style: groove;
+                background-color: rgb(239, 239, 239);
+            }
+            .home-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 20px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;
+            }
+            .explore-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 90px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;
+            }
+            .subs-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 165px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;
+            }
+            .originals-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 240px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;
+            }
+            .music-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 315px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;
+            }
+            .library-txt{
+                font-weight: 500;
+                padding-bottom: 100px;
+                font-size: 20px;
+                top: 388px;
+                left: -15px;
+                z-index: 5;
+                position: absolute;
+                padding-left: 100px;               
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <img class="ham" src="icons/hamburger-menu.svg">
+                <a href="https://www.youtube.com/"><img class="yt-logo" src="icons/youtube-logo.svg"></a>
+            </div>
+            <div class="middle-section">
+                <input class="search-bar" type="text" placeholder="Search">
+                <button class="search-btn"><img src="icons/search.svg" ></button>
+                <button class="yt-voice"><img src="icons/voice-search-icon.svg"></button>
+            </div>
+            <div class="right-section">
+                <img class="upload" src="icons/upload.svg">
+                <img class="yt-apps" src="icons/youtube-apps.svg">
+                <div class="notification-container">
+                    <img class="yt-notification" src="icons/notifications.svg">
+                    <div class="notification-count">3</div>
+                </div>
+                
+                <img class="my-profile" src="mychannel pfp.jpg">
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-link">
+                <img class="yt-home" src="icons/home.svg">
+                <p class="home-txt">Home</p>
+            </div>
+            <div class="sidebar-link">
+                <img class="yt-explore" src="icons/explore.svg">
+                <p class="explore-txt">Explore</p>
+            </div>
+            <div class="sidebar-link">
+                <img class="yt-subscriptions" src="icons/subscriptions.svg">
+                <p class="subs-txt">Subscriptions</p>
+            </div>
+            <div class="sidebar-link">
+                <img class="yt-originals" src="icons/originals.svg">
+                <p class="originals-txt">Originals</p>
+            </div>
+            <div class="sidebar-link">
+                <img class="yt-music" src="icons/youtube-music.svg">
+                <p class="music-txt">Music</p>
+            </div>
+            <div class="sidebar-link">
+                <img class="yt-library" src="icons/library.svg">
+                <p class="library-txt">Library</p>
+            </div>
+            
+        </div>
+        <div class="video-grid">
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">23:49</div>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=_fWyWcZB7VA&pp=ygUfaGVhbHRoIGFueGlldHkgYWJoaXNoZWsgdXBtYW55dQ%3D%3D"><img class="image" src="thumb.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <img class="pfp" src="channel pfp.jpg">
+                    <div class="video-desc">
+                        <p class="video-name">
+                            Health Anxiety - Standup Comedy by Abhishek Upmanyu
+                        </p>
+                        <p class="channel-name">
+                            Abhishek Upmanyu
+                        </p>
+                        <p class="views">21M views &#183 1 year ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">0:56</div>
+                    <a href="https://www.youtube.com/watch?v=thch9uczp98&pp=ygUld2hlbiBhbiBhcmtoYW0gcGxheWVyIHRha2VzIHNwaWRlcm1hbg%3D%3D"><img class="image" src="thumb2.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <a href="https://www.youtube.com/@aupmanyu"><img class="pfp" src="channel pfp 2.jpg"></a>
+                    <div class="video-desc">
+                        <p class="video-name">
+                            When an ARKHAM PLAYER takes SPIDER-MAN STEALTH seriously v5
+                        </p>
+                        <p class="channel-name">
+                            LisGaKil
+                        </p>
+                        <p class="views">697k views &#183 5 months ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">3:17</div>
+                    <a href="https://youtu.be/2xomWWncop0"><img class="image" src="thumb3.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <img class="pfp" src="channel pfp 3.jpg">
+                    <div class="video-desc">
+                        <p class="video-name">
+                            Spider-Man: Across the Spider-Verse | &quot;Am I Dreaming&quot; Metro Boomin x A$AP Rocky x Roisee | Lyrics
+                        </p>
+                        <p class="channel-name">
+                            Sony Pictures Animation
+                        </p>
+                        <p class="views">4.3M views &#183 6 months ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">17:50</div>
+                    <a href="https://youtu.be/7ivEDhelEBg"><img class="image" src="thumb4.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <img class="pfp" src="channel pfp 4.jpg">
+                    <div class="video-desc">
+                        <p class="video-name">
+                            The Emotional Cost Of Being A Deep Thinker-Dr K HealthyGamer
+                        </p>
+                        <p class="channel-name">
+                            Chris Williamson
+                        </p>
+                        <p class="views">514k views &#183 2 months ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">22:31</div>
+                    <a href="https://youtu.be/ekQLGA2xHgk"><img class="image" src="thumb5.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <img class="pfp" src="channel pfp 5.jpg">
+                    <div class="video-desc">
+                        <p class="video-name">
+                            Watch this before you start coding!| 10 Tips for Coders
+                        </p>
+                        <p class="channel-name">
+                            Apna College
+                        </p>
+                        <p class="views">2M views &#183 1 year ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="video-preview">
+                <div class="thumb-row">
+                    <div class="video-time">31:03</div>
+                    <a href="https://youtu.be/OiqSxdARCu4"><img class="image" src="thumb6.webp" ></a>
+                </div>
+                <div class="video-details">
+                    <img class="pfp" src="channel pfp 6.jpg">
+                    <div class="video-desc">
+                        <p class="video-name">
+                            Army Aspirants vs Modi Govt | Agnipath Scheme
+                        </p>
+                        <p class="channel-name">
+                            Mohak Mangal
+                        </p>
+                        <p class="views">401k views &#183 21 hours ago</p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </body>
+</html>
